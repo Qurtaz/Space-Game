@@ -3,15 +3,11 @@ using System.Collections;
 
 public class Support : Ship {
     private int numberRepair;
-    public void zeroRepair()
-    {
-        numberRepair = 5;
-    }
-    public void useRepair()
+    void useRepair()
     {
         numberRepair--;
     }
-    public void Start()
+    public void Awake()
     {
         hpMax = 300;
         hp = hpMax;
@@ -19,20 +15,23 @@ public class Support : Ship {
         pancerz = 150;
         atak = 0;
     }
+
     public override void ulepsz()
     {
         creatUpgrate();
         atak = 20;
     }
-    public override void doing(Ship ship)
+    public override void doing(GameObject stat)
     {
-        if(numberRepair!=0)
+        Ship _repair = stat.GetComponent<Ship>();
+        if (numberRepair != 0 && stat.tag == "Player")
         {
-            ship.repair();
+            _repair.repair();
+
         }
         else
         {
-            ship.setHP(atak);
+            shots.dmg = Atack();
         }
     }
     void Update()

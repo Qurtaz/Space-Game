@@ -4,8 +4,9 @@ using System.Collections;
 public class Fighter : Ship {
 
     private int piercingAmonition;
-    public void Start()
+    public void Awake()
     {
+        Debug.Log("Fighter");
         hpMax = 100;
         hp = hpMax;
         typStatku = "Fighter";
@@ -28,9 +29,10 @@ public class Fighter : Ship {
         piercingAmonition = 25;
 
     }
-    public override void doing(Ship ship)
+    public override void doing(GameObject stat)
     {
-        ship.setHP(atak + ship.pancerz / piercingAmonition);
+        Ship ship = stat.GetComponent<Ship>();
+        shots.dmg= Atack()+ ship.pancerz / piercingAmonition;
     }
     void Update()
     {

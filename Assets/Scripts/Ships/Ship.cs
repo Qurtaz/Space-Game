@@ -5,6 +5,12 @@ using System.Collections;
     
     public class Ship:MonoBehaviour
     {
+        public GameObject Shot;
+        protected Schoot shots;
+        void Awake()
+        {
+            shots = Shot.GetComponent<Schoot>();
+        }
         public GameObject game;
         public int hp { get; protected set; }
         public int hpMax { get; protected set; }
@@ -30,7 +36,7 @@ using System.Collections;
         {
             return hp / 50 + atak / 50 + pancerz / 20;
         }
-        public virtual void doing(Ship ship)
+        public virtual void doing(GameObject stat)
         {
 
         }
@@ -52,6 +58,18 @@ using System.Collections;
             {
                 Destroy(game);
             }
+        }
+        public bool canRepair()
+        {
+            if(hp<hpMax)
+            {
+                return true; 
+            }
+            return false;
+        }
+        public virtual int Atack()
+        {
+            return atak;
         }
         
     }

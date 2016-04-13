@@ -4,7 +4,7 @@ using System.Collections;
 public class Ironcad : Ship {
     private int Shield;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         hpMax = 250;
         hp = hpMax;
         typStatku = "Ironcald";
@@ -22,9 +22,9 @@ public class Ironcad : Ship {
         Shield = 1000;
 
     }
-    public override void doing(Ship ship)
+    public override void doing(GameObject stat)
     {
-        ship.setHP(atak);
+        shots.dmg = Atack();
     }
     public override void setHP(int atak)
     {
