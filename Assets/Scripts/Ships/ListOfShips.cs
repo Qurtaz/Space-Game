@@ -8,40 +8,65 @@ public class GameShip
     public GameObject Fighter;
     public GameObject Ironclad;
     public GameObject Support;
+    public GameObject upFighter;
+    public GameObject upIronclad;
+    public GameObject upSupport;
 }
 
-public class ListOfShips : MonoBehaviour {
+public class ListOfShips {
 
-    List<GameObject> listShips;
     public int fighter;
+    public int upfighter;
     public int ironclad;
+    public int upironclad;
     public int support;
+    public int upsupport;
     public  GameShip CShips;
 
-	// Use this for initialization
-	void Start () {
-        listShips = new List<GameObject>();
-        int war = Random.Range(1,10);
-        fighter = war;
-        ironclad = 10 - war;
-        
-	}
-    void Update()
+    public void addFighter()
     {
+        fighter++;
+    }
+    public void addIroncald()
+    {
+        ironclad++;
+    }
+    public void addSupport()
+    {
+        support++;
+    }
+    public void addUpfighter()
+    {
+        upfighter++;
+        fighter--;
 
     }
-    void addFighter()
+    public void addUpironcald()
     {
-         listShips.Add(CShips.Fighter);
+        upironclad++;
+        ironclad--;
     }
-    void addIroncald()
+    public void addUpsupport()
     {
-         listShips.Add(CShips.Ironclad);
+        upsupport++;
+        support--;
     }
-    void addSupport()
+	public float fighhtStrenght()
     {
-        listShips.Add(CShips.Support);
+        Ship zf;
+        float z;
+        zf = CShips.Fighter.GetComponent<Ship>();
+        z = fighter * zf.getFightStrenght();
+        zf = CShips.upFighter.GetComponent<Ship>();
+        z += fighter * zf.getFightStrenght();
+        zf = CShips.Ironclad.GetComponent<Ship>();
+        z += fighter * zf.getFightStrenght();
+        zf = CShips.upIronclad.GetComponent<Ship>();
+        z += fighter * zf.getFightStrenght();
+        zf = CShips.Support.GetComponent<Ship>();
+        z += fighter * zf.getFightStrenght();
+        zf = CShips.upSupport.GetComponent<Ship>();
+        z += fighter * zf.getFightStrenght();
+        return z;
     }
-	
-	
 }

@@ -8,7 +8,15 @@ public class Player : MonoBehaviour {
     private int fightStr;
     private int planets;
     private float timeRepaet;
+    public bool finish = false;
     public GameObject ClosestPlanet;
+    private ListOfShips list;
+
+    public ListOfShips returnListOfShip()
+    {
+        list = gameObject.GetComponent<ListOfShips>();
+        return list;
+    }
     public float getPoints()
     {
     return points;
@@ -16,6 +24,14 @@ public class Player : MonoBehaviour {
     public int getMoney()
     {
     return money;
+    }
+    public void loadPoints(float points1)
+    {
+       points=points1;
+    }
+    public void loadMoney(int money1)
+    {
+        money = money1;
     }
     public int getFigrtStrenght()
     {
@@ -35,7 +51,7 @@ public class Player : MonoBehaviour {
     }
     public void setMoney(int value)
     {
-        money = value;
+        money -= value;
     }
 	void Start () {
         points = 50000;
@@ -45,19 +61,52 @@ public class Player : MonoBehaviour {
         timeRepaet = 0.05f;
         InvokeRepeating("minusPoints",timeRepaet,timeRepaet);
         InvokeRepeating("addMoney", timeRepaet*100, timeRepaet*100);
+        list.fighter = 10;
+        list.ironclad = 5;
 	}
     
     void minusPoints()
     {
-        points = points - 0.5f;
+        if(finish == false)
+        {
+            points = points - 0.5f;
+        }
+
     }
     void addMoney()
     {
-        money = money + 50 + 20 * planets;
+        if(finish == false)
+        {
+            money = money + 50 + 20 * planets;
+        }
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
+    public void buyFighter()
+    {
+        list.addFighter();
+    }
+    public void buyIronclad()
+    {
+        list.addIroncald();
+    }
+    public void buySupport()
+    {
+        list.addSupport();
+    }
+    public void upgradeFighter()
+    {
+        list.addUpfighter();
+    }
+    public void upgradeIronclad()
+    {
+        list.addUpironcald();
+    }
+    public void upgradeSupport()
+    {
+        list.addUpsupport();
+    }
 }

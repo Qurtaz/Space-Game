@@ -24,7 +24,7 @@ public class ShipHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        SetHealthUI();
 	}
     private void SetHealthUI()
     {

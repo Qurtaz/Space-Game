@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Schoot : MonoBehaviour {
     public float speed;
-    GameObject Parent;
+    public GameObject Ship;
     private Rigidbody rb;
     public int dmg;
     private Ship shipParent;
@@ -11,15 +11,20 @@ public class Schoot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
-        rb.velocity =  transform.forward * speed;
+        rb.velocity =  transform.up * speed;
 	}
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag!=Parent.tag && collision.gameObject.tag != "Space")
+        if(collision.gameObject.tag!=Ship.tag && collision.gameObject.tag != "Space")
         {
             shipCol = gameObject.GetComponent<Ship>();
+            shipParent.doing(collision.gameObject);
             shipCol.setHP(dmg);
+        }
+        if(collision.gameObject.tag==Ship.tag)
+        {
+            shipParent.doing(collision.gameObject);
         }
 
     }
